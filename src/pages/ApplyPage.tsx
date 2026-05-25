@@ -89,6 +89,190 @@ export default function ApplyPage({ onBackToHome, onSubmitSuccess }: ApplyPagePr
   const [uploadedFiles, setUploadedFiles] = useState<{ [key: string]: string }>({});
   const [uploadingField, setUploadingField] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const downloadApplicationPDF = (refCode: string, applicantName: string) => {
+    return new Promise<void>((resolve) => {
+      const executeDownload = () => {
+        try {
+          const { jsPDF } = (window as any).jspdf;
+          if (!jsPDF) {
+            console.error("jsPDF not found on window");
+            resolve();
+            return;
+          }
+
+          const doc = new jsPDF();
+          
+          // Draw standard page border
+          doc.setDrawColor(30, 58, 138); // Navy blue border
+          doc.setLineWidth(1);
+          doc.rect(5, 5, 200, 287);
+          doc.rect(6, 6, 198, 285);
+
+          // Header Title
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(16);
+          doc.setTextColor(30, 58, 138); // Navy Blue
+          doc.text("AMBEDKAR BEGUMPURA EDUCATION TRUST", 105, 20, { align: "center" });
+
+          doc.setFontSize(10);
+          doc.setTextColor(100, 116, 139); // Slate-500
+          doc.text("Education * Equality * Empowerment", 105, 26, { align: "center" });
+          doc.text("Registered Trust No: 100/2026", 105, 31, { align: "center" });
+
+          // Divider Line
+          doc.setDrawColor(226, 232, 240); // slate-200
+          doc.line(15, 38, 195, 38);
+
+          // Receipt Subtitle
+          doc.setFontSize(14);
+          doc.setTextColor(217, 119, 6); // Accent Gold (#d97706)
+          doc.text("OFFICIAL SCHOLARSHIP APPLICATION RECEIPT", 105, 48, { align: "center" });
+
+          // Reference Code Box
+          doc.setFillColor(240, 247, 255); // light blue
+          doc.rect(40, 55, 130, 12, "F");
+          doc.setDrawColor(191, 219, 254); // blue-200
+          doc.rect(40, 55, 130, 12, "D");
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(11);
+          doc.setTextColor(30, 58, 138);
+          doc.text(`Reference ID: ${refCode}`, 105, 62, { align: "center" });
+
+          // 1. Applicant Identity Block
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(10);
+          doc.setTextColor(147, 51, 234); // Purple-600
+          doc.text("1. PERSONAL IDENTITY PROFILE", 15, 78);
+          doc.setDrawColor(226, 232, 240);
+          doc.line(15, 80, 195, 80);
+
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(51, 65, 85); // Slate-700
+          doc.text(`Full Legal Name: ${form.fullName.toUpperCase()}`, 15, 87);
+          doc.text(`Parent / Guardian Name: ${form.guardianName.toUpperCase()}`, 15, 93);
+          doc.text(`Date of Birth: ${form.dob}`, 15, 99);
+          doc.text(`Gender: ${form.gender}`, 110, 99);
+          doc.text(`Mobile Phone Number: +91 ${form.phone}`, 15, 105);
+          doc.text(`Email Address: ${form.email || "N/A"}`, 110, 105);
+          doc.text(`Aadhaar Card (Last 4 Digits): XXXX-XXXX-${form.aadhaarLast4}`, 15, 111);
+          doc.text(`Mailing Address: ${form.address} - PIN ${form.pinCode}`, 15, 117);
+
+          // 2. Educational & Financial Path
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(147, 51, 234);
+          doc.text("2. ACADEMIC & FINANCIAL CONTEXT", 15, 130);
+          doc.line(15, 132, 195, 132);
+
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(51, 65, 85);
+          doc.text(`Current Course / Class: ${form.course.toUpperCase()}`, 15, 139);
+          doc.text(`Year / Semester: ${form.grade.toUpperCase()}`, 110, 139);
+          doc.text(`Institution / School / College: ${form.institution.toUpperCase()}`, 15, 145);
+          doc.text(`Board / University: ${form.boardUniversity.toUpperCase()}`, 15, 151);
+          doc.text(`Last Exam Passed: ${form.lastExamPassed.toUpperCase()}`, 15, 157);
+          doc.text(`Percentage / CGPA Obtained: ${form.percentageCgpa}`, 110, 157);
+          doc.text(`Family Annual Income: INR ${form.familyAnnualIncome}`, 15, 163);
+          doc.text(`Parent / Guardian Occupation: ${form.parentOccupation.toUpperCase()}`, 110, 163);
+
+          // 3. Support Matrix
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(147, 51, 234);
+          doc.text("3. SUPPORT MATRIX SELECTION & STATEMENT", 15, 176);
+          doc.line(15, 178, 195, 178);
+
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(51, 65, 85);
+          const activeSupports: string[] = [];
+          if (form.assistanceScholarship) activeSupports.push("Scholarship");
+          if (form.assistanceTuition) activeSupports.push("Tuition Fees");
+          if (form.assistanceBooks) activeSupports.push("Books & Materials");
+          if (form.assistanceCoaching) activeSupports.push("Coaching prep");
+          if (form.assistanceHostel) activeSupports.push("Hostel allowances");
+          if (form.assistanceDigital) activeSupports.push("Digital Laptop Support");
+          if (form.assistanceOther) activeSupports.push(`Other: ${form.assistanceOther}`);
+          
+          doc.text(`Requested Assistance: ${activeSupports.join(", ")}`, 15, 185);
+
+          // Wrap long Statement of Need text
+          doc.text("Statement of Need:", 15, 191);
+          doc.setFont("helvetica", "italic");
+          const splitStatement = doc.splitTextToSize(`"${form.statementOfNeed}"`, 175);
+          doc.text(splitStatement, 15, 197);
+
+          // 4. Payee Routing
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(147, 51, 234);
+          doc.text("4. PAYEE BANK ROUTING DETAILS", 15, 220);
+          doc.line(15, 222, 195, 222);
+
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(51, 65, 85);
+          doc.text(`Account Payee Name: ${form.bankHolderName.toUpperCase()}`, 15, 229);
+          doc.text(`Official Bank Name: ${form.bankName.toUpperCase()}`, 110, 229);
+          doc.text(`Account Number: •••• •••• ${form.bankAccountNumber.slice(-4) || "XXXX"}`, 15, 235);
+          doc.text(`IFS Routing Code: ${form.bankIfscCode}`, 110, 235);
+
+          // Stamp & Legal Seal
+          doc.setFillColor(248, 250, 252); // grey background
+          doc.rect(15, 245, 180, 24, "F");
+          doc.setDrawColor(226, 232, 240);
+          doc.rect(15, 245, 180, 24, "D");
+
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(8);
+          doc.setTextColor(30, 58, 138);
+          doc.text("[ STABILIZER DESK SECURITY SEALS ]", 20, 251);
+          
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(100, 116, 139);
+          doc.text("STATUS: DIGITAL DRAFT SIGNED", 20, 256);
+          doc.text("AUDIT STAMP: PENDING TRUSTEE AUDIT", 20, 261);
+          doc.text("COMPLIANCE SEAL: SECURE SSL-256 REGISTERED", 20, 266);
+
+          // Cursive Typed Signature
+          doc.setFont("courier", "bolditalic");
+          doc.setFontSize(11);
+          doc.setTextColor(16, 185, 129); // Emerald signature
+          doc.text(`Signed by: ${form.signatureTyped}`, 115, 256);
+          doc.setFont("helvetica", "italic");
+          doc.setFontSize(8);
+          doc.setTextColor(148, 163, 184);
+          doc.text("(Applicant Digital Assent Seal)", 115, 261);
+
+          // Bottom Footer
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(8);
+          doc.setTextColor(148, 163, 184);
+          doc.text("© 2026 Ambedkar Begumpura Education Trust. universal equality registry record.", 105, 280, { align: "center" });
+
+          // Save the PDF
+          const filename = `ABET_Application_${applicantName.replace(/\s+/g, "_")}_${refCode.replace(/\//g, "_")}.pdf`;
+          doc.save(filename);
+          resolve();
+        } catch (err) {
+          console.error("PDF generation failed:", err);
+          resolve();
+        }
+      };
+
+      if ((window as any).jspdf) {
+        executeDownload();
+      } else {
+        const script = document.createElement("script");
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+        script.onload = () => {
+          executeDownload();
+        };
+        script.onerror = () => {
+          console.error("Failed to load jsPDF library from CDN.");
+          resolve();
+        };
+        document.body.appendChild(script);
+      }
+    });
+  };
 
   // Auto Scroll helper inside the form
   const formTopRef = useRef<HTMLDivElement>(null);
@@ -279,7 +463,7 @@ export default function ApplyPage({ onBackToHome, onSubmitSuccess }: ApplyPagePr
   };
 
   // Submit complete multi-step form
-  const handleApplyFormSubmitFinal = (e: React.FormEvent) => {
+  const handleApplyFormSubmitFinal = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!form.signatureTyped.trim()) {
@@ -288,11 +472,15 @@ export default function ApplyPage({ onBackToHome, onSubmitSuccess }: ApplyPagePr
     }
 
     setErrorMsg(null);
+    setIsSubmitting(true);
 
     // Mock final submission and trigger main page success modal
     const code = Math.floor(100000 + Math.random() * 900000);
     const refCode = `ABET/2026/ASSIST-${code}`;
     
+    // Automatically download the PDF document
+    await downloadApplicationPDF(refCode, form.fullName);
+
     // Trigger parent callback
     onSubmitSuccess(refCode, form.fullName, form.phone);
     
@@ -300,6 +488,7 @@ export default function ApplyPage({ onBackToHome, onSubmitSuccess }: ApplyPagePr
     setForm(INITIAL_FORM);
     setUploadedFiles({});
     setCurrentStep(1);
+    setIsSubmitting(false);
     onBackToHome();
   };
 
@@ -1114,7 +1303,7 @@ export default function ApplyPage({ onBackToHome, onSubmitSuccess }: ApplyPagePr
                       </div>
 
                       {/* PHYSICAL PRINT COPY MOCKUP */}
-                      <div className="border-4 border-slate-200 bg-slate-50/40 p-4 sm:p-6 rounded-2xl relative overflow-hidden text-xs text-slate-600 leading-relaxed font-sans shadow-inner">
+                      <div id="application-review-draft" className="border-4 border-slate-200 bg-slate-50/40 p-4 sm:p-6 rounded-2xl relative overflow-hidden text-xs text-slate-600 leading-relaxed font-sans shadow-inner">
                         {/* Draft Watermark */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.04] select-none scale-150 rotate-12">
                           <span className="text-[5rem] font-black uppercase text-slate-900 tracking-widest">ABET COPIED</span>
@@ -1274,10 +1463,15 @@ export default function ApplyPage({ onBackToHome, onSubmitSuccess }: ApplyPagePr
                 ) : (
                   <button
                     type="button"
+                    disabled={isSubmitting}
                     onClick={handleApplyFormSubmitFinal}
-                    className="flex items-center gap-1.5 px-7 py-3 bg-gradient-to-br from-[#1e3a8a] to-[#9333ea] hover:shadow-lg text-white font-black uppercase text-xs rounded-xl tracking-widest transition-all shadow-md active:scale-95 duration-200"
+                    className="flex items-center gap-1.5 px-7 py-3 bg-gradient-to-br from-[#1e3a8a] to-[#9333ea] hover:shadow-lg text-white font-black uppercase text-xs rounded-xl tracking-widest transition-all shadow-md active:scale-95 duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Transmit Finished Registry File ✓
+                    {isSubmitting ? (
+                      <>Transmitting &amp; Downloading PDF... <Upload size={14} className="animate-spin ml-1" /></>
+                    ) : (
+                      <>Transmit Finished Registry File ✓</>
+                    )}
                   </button>
                 )}
               </div>

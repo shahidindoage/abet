@@ -321,18 +321,18 @@ export default function App() {
 
   {/* Brand Identity & Primary Menu bar */}
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex justify-between items-center py-3 lg:py-4">
+    <div className="flex justify-between lg:items-end items-center py-3 lg:py-4">
       
       {/* Logo and Brand block */}
       <div 
-        className="flex items-center gap-3 cursor-pointer" 
+        className="flex items-center gap-2 sm:gap-3 cursor-pointer relative shrink-0" 
         onClick={() => {
           navigate("/");
           setActiveAnchor("#home");
           window.scrollTo({top: 0, behavior: "smooth"});
         }}
       >
-        <div className="w-12 h-12 rounded-full flex items-center justify-center shadow overflow-hidden border border-slate-200 bg-white">
+        <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-26 lg:h-26 xl:w-28 xl:h-28 rounded-full flex items-center justify-center overflow-hidden shrink-0 ">
           <img 
             src="https://vrfacwizigigcpowkrye.supabase.co/storage/v1/object/public/General/ngo-logo.png" 
             alt="ABET Logo" 
@@ -340,26 +340,26 @@ export default function App() {
             referrerPolicy="no-referrer" 
           />
         </div>
-        <div className="flex flex-col">
-          <span className="font-extrabold text-base md:text-lg leading-tight uppercase tracking-tight text-[#1e3a8a]">
+        <div className="flex flex-col text-left justify-center">
+          <span className="font-bold text-[12px] sm:text-[16px] md:text-[20px] lg:text-[26px] xl:text-[34px] leading-tight uppercase tracking-tight text-[#1e3a8a]">
             Ambedkar Begumpura
           </span>
-          <span className="font-extrabold text-xs md:text-lg leading-none tracking-tight text-[#1e3a8a] uppercase">
+          <span className="font-bold text-[12px] sm:text-[16px] md:text-[20px] lg:text-[26px] xl:text-[34px] leading-none tracking-tight text-[#1e3a8a] uppercase">
             Education Trust
           </span>
-          <span className="text-[9px]  font-bold tracking-widest leading-none text-slate-500 mt-2">
+          <span className="text-[7px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-[13px] font-bold tracking-widest leading-none text-slate-500 mt-1 sm:mt-1.5 lg:mt-2">
             Education • Equality • Empowerment
           </span>
         </div>
       </div>
 
       {/* Main Nav Items */}
-      <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+      <nav className="hidden lg:flex items-center gap-6 lg:gap-8">
         {[
           { label: "Home", anchor: "#home" },
           { label: "About Us", anchor: "#about" },
           { label: "Programmes", anchor: "#programmes" },
-              { label: "Scholarships", anchor: "#scholarships" },
+          { label: "Scholarships", anchor: "#scholarships" },
           { label: "Apply", anchor: "#apply" },
           { label: "Gallery", anchor: "#gallery" },
           { label: "Contact", anchor: "#contact" }
@@ -368,7 +368,7 @@ export default function App() {
             key={item.anchor} 
             to={item.anchor === "#apply" ? "/apply" : `/${item.anchor}`}
             onClick={handleScrollToSection(item.anchor)}
-            className={`text-sm tracking-wide font-bold uppercase py-2 transition-all border-b-2 hover:border-accent hover:text-accent ${activeAnchor === item.anchor ? 'border-accent text-accent' : 'border-transparent text-slate-700'}`}
+            className={`text-[10px] tracking-wide font-bold uppercase py-2 transition-all border-b-2 hover:border-accent hover:text-accent ${activeAnchor === item.anchor ? 'border-accent text-accent' : 'border-transparent text-slate-700'}`}
           >
             {item.label}
           </Link>
@@ -387,7 +387,7 @@ export default function App() {
       </nav>
 
       {/* Mobile burger toggle */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
           className="text-slate-700 hover:text-accent p-2 transition-colors"
@@ -407,7 +407,7 @@ export default function App() {
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: 1, height: 'auto' }}
         exit={{ opacity: 0, height: 0 }}
-        className="md:hidden bg-white border-t border-slate-100 px-4 pb-6 flex flex-col gap-1 shadow-xl overflow-hidden"
+        className="lg:hidden bg-white border-t border-slate-100 px-4 pb-6 flex flex-col gap-1 shadow-xl overflow-hidden"
       >
         {[
           { label: "Home", anchor: "#home" },
@@ -735,7 +735,7 @@ The Trust is committed to creating inclusive educational opportunities that enab
 
 
          {/* GALLERY SECTION */}
-        <section id="gallery" className="py-16 md:py-20 bg-white">
+        {/* <section id="gallery" className="py-16 md:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="text-center max-w-2xl mx-auto mb-16">
@@ -751,7 +751,7 @@ The Trust is committed to creating inclusive educational opportunities that enab
               </p>
             </div>
 
-            {/* Gallery Images Grid */}
+           
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {GALLERY_IMAGES.map((img, i) => (
                 <div 
@@ -767,7 +767,7 @@ The Trust is committed to creating inclusive educational opportunities that enab
                     />
                   </div>
                   
-                  {/* Overlay detailing */}
+                 
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-5 text-left">
                     <span className="text-accent font-black uppercase text-[10px] tracking-widest mb-1">
                       ABET Drive
@@ -780,7 +780,7 @@ The Trust is committed to creating inclusive educational opportunities that enab
                     </p>
                   </div>
 
-                  {/* Tiny status on footer */}
+               
                   <div className="bg-slate-50 px-4 py-3 border-t border-slate-100 flex justify-between items-center group-hover:bg-slate-100 transition-colors">
                     <span className="text-xs font-bold text-slate-700 truncate pr-2">{img.title}</span>
                     <span className="text-[10px] font-black uppercase text-[#1e3a8a] shrink-0">View Drive</span>
@@ -790,7 +790,7 @@ The Trust is committed to creating inclusive educational opportunities that enab
             </div>
 
           </div>
-        </section>
+        </section> */}
 
         {/* SECTION 3: DOUBLE CALL TO ACTION CARDS (BLUE & PEACH SPLIT) */}
         <section className="py-12 bg-white border-b border-slate-100">
@@ -857,49 +857,62 @@ The Trust is committed to creating inclusive educational opportunities that enab
       <footer id="contact" className="bg-[#0f172a] text-slate-300 pt-16 md:pt-20 pb-10 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16 text-left">
             
             {/* Box 1: NGO Identity and Motto */}
-            <div className="sm:col-span-2 lg:col-span-1">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-0.5 shadow border border-slate-700 overflow-hidden">
+            <div className="sm:col-span-2 lg:col-span-5">
+              <div 
+                className="flex items-center gap-3 mb-6 cursor-pointer"
+                onClick={() => {
+                  navigate("/");
+                  setActiveAnchor("#home");
+                  window.scrollTo({top: 0, behavior: "smooth"});
+                }}
+              >
+                <div className="lg:w-26 w-20 lg:h-26 h-20 bg-white rounded-full flex items-center justify-center p-0.5 overflow-hidden shrink-0">
                   <img 
                     src="https://vrfacwizigigcpowkrye.supabase.co/storage/v1/object/public/General/ngo-logo.png" 
                     alt="ABET Logo" 
                     className="w-full h-full object-contain" 
                   />
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-extrabold text-white tracking-wider text-sm block uppercase">Ambedkar Begumpura</span>
-                  <span className="font-extrabold text-white tracking-wider text-sm block uppercase">Education Trust</span>
-                  <span className="text-[9px]  font-bold text-slate-400 mt-[2px] ">Education • Equality • Empowerment</span>
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-white tracking-tight text-base md:text-[28px] leading-tight uppercase">
+                    Ambedkar Begumpura
+                  </span>
+                  <span className="font-bold text-white tracking-tight text-base md:text-[28px] leading-none uppercase">
+                    Education Trust
+                  </span>
+                  <span className="lg:text-[14px] text-[10px] font-bold tracking-widest leading-none text-slate-400 mt-2">
+                    Education • Equality • Empowerment
+                  </span>
                 </div>
               </div>
-              <p className="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed max-w-sm">
                 Empowering the youth through education and constitutional values. Registered Trust No: 100/2026.
               </p>
               
               {/* Social Buttons */}
-            <div className="flex items-center gap-3.5 pt-2">
-  {Object.keys(SOCIAL_ICONS).map((social) => {
-    // Dynamically look up the right component
-    const IconComponent = SOCIAL_ICONS[social as keyof typeof SOCIAL_ICONS];
+              <div className="flex items-center gap-3.5 pt-2">
+                {Object.keys(SOCIAL_ICONS).map((social) => {
+                  // Dynamically look up the right component
+                  const IconComponent = SOCIAL_ICONS[social as keyof typeof SOCIAL_ICONS];
 
-    return (
-      <button 
-        key={social} 
-        aria-label={`Visit our ${social} page`}
-        className="w-8 h-8 rounded bg-slate-800 inline-flex items-center justify-center hover:bg-[#f59e0b] hover:text-slate-900 text-slate-400 transition-colors"
-      >
-        <IconComponent size={16} strokeWidth={2.25} />
-      </button>
-    );
-  })}
-</div>
+                  return (
+                    <button 
+                      key={social} 
+                      aria-label={`Visit our ${social} page`}
+                      className="w-8 h-8 rounded bg-slate-800 inline-flex items-center justify-center hover:bg-[#f59e0b] hover:text-slate-900 text-slate-400 transition-colors"
+                    >
+                      <IconComponent size={16} strokeWidth={2.25} />
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Box 2: Quick links */}
-            <div>
+            <div className="sm:col-span-1 lg:col-span-2">
               <h4 className="font-bold text-base uppercase text-[#f59e0b] tracking-widest mb-6 pb-2 border-b border-slate-800">
                 Quick Links
               </h4>
@@ -907,7 +920,7 @@ The Trust is committed to creating inclusive educational opportunities that enab
                 <li><a href="#home" onClick={handleScrollToSection("#home")} className="hover:text-accent transition-colors font-medium">Home</a></li>
                 <li><a href="#about" onClick={handleScrollToSection("#about")} className="hover:text-accent transition-colors font-medium">About Us</a></li>
                 <li><a href="#programmes" onClick={handleScrollToSection("#programmes")} className="hover:text-accent transition-colors font-medium">Programmes</a></li>
-                  <li><a href="#scholarships" onClick={handleScrollToSection("#scholarships")} className="hover:text-accent transition-colors font-medium">Scholarships</a></li>
+                <li><a href="#scholarships" onClick={handleScrollToSection("#scholarships")} className="hover:text-accent transition-colors font-medium">Scholarships</a></li>
                 <li><a href="#apply" onClick={handleScrollToSection("#apply")} className="hover:text-accent transition-colors font-medium"> Apply</a></li>
                 <li><a href="#gallery" onClick={handleScrollToSection("#gallery")} className="hover:text-accent transition-colors font-medium">Gallery</a></li>
                 <li><a href="#contact" onClick={handleScrollToSection("#contact")} className="hover:text-accent transition-colors font-medium">Contact Us</a></li>
@@ -915,22 +928,21 @@ The Trust is committed to creating inclusive educational opportunities that enab
             </div>
 
             {/* Box 3: Strategic Programs */}
-            <div>
+            <div className="sm:col-span-1 lg:col-span-2">
               <h4 className="font-bold text-base uppercase text-[#f59e0b] tracking-widest mb-6 pb-2 border-b border-slate-800">
                 Our Programs
               </h4>
               <ul className="space-y-3.5 text-xs sm:text-sm text-slate-400">
-                    <li><a href="#scholarships" onClick={handleScrollToSection("#scholarships")} className="hover:text-accent transition-colors font-medium">Scholarships</a></li>
+                <li><a href="#scholarships" onClick={handleScrollToSection("#scholarships")} className="hover:text-accent transition-colors font-medium">Scholarships</a></li>
                 <li><a href="#objectives" onClick={handleScrollToSection("#objectives")} className="hover:text-accent font-medium">Digital Learning Support</a></li>
                 <li><a href="#objectives" onClick={handleScrollToSection("#objectives")} className="hover:text-[#f59e0b] font-medium">Books & Study Material</a></li>
                 <li><a href="#objectives" onClick={handleScrollToSection("#objectives")} className="hover:text-[#f59e0b] font-medium">Career Guidance</a></li>
-                {/* <li><a href="#objectives" onClick={handleScrollToSection("#objectives")} className="hover:text-[#f59e0b] font-medium">Free Book Distribution Drives</a></li> */}
                 <li><a href="#objectives" onClick={handleScrollToSection("#objectives")} className="hover:text-[#f59e0b] font-medium">Mentorship</a></li>
               </ul>
             </div>
 
             {/* Box 4: Actual coordinates matching target NGO */}
-            <div>
+            <div className="sm:col-span-2 lg:col-span-3">
               <h4 className="font-bold text-base uppercase text-[#f59e0b] tracking-widest mb-6 pb-2 border-b border-slate-800">
                 Contact Us
               </h4>
@@ -1417,7 +1429,7 @@ const Hero = () => {
 
       {/* LAYER 3: Blended Dr. Ambedkar Portrait on the Left */}
       <div 
-        className="absolute bottom-0 left-0 top-0 w-full md:w-[45%] z-20 pointer-events-none opacity-[0.22] mix-blend-luminosity bg-no-repeat bg-left-bottom bg-contain hidden md:block"
+        className="absolute bottom-0 left-0 top-15 w-full md:w-[45%] z-20 pointer-events-none opacity-[0.22] mix-blend-luminosity bg-no-repeat bg-left-bottom bg-contain hidden md:block"
         style={{ 
           backgroundImage: `url('Dr._Bhimrao_Ambedkar.png')`,
           maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
