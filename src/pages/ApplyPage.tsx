@@ -517,7 +517,7 @@ export default function ApplyPage({ onBackToHome, onSubmitSuccess }: ApplyPagePr
       </div> */}
 
       {/* Hero Banner header block */}
-      <div className="mb-10 text-center max-w-4xl mx-auto">
+      <div className="lg:mt-10 mb-10 text-center max-w-4xl mx-auto">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-[#1e3a8a] border border-blue-100 rounded-full text-[10px] uppercase font-black tracking-widest mb-4">
           <ShieldCheck size={12} className="text-[#9333ea]" /> Ambedkar Begumpura Education Trust (ABET)
         </span>
