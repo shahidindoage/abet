@@ -290,21 +290,21 @@ export default function App() {
       <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50 transition-all duration-300">
         
   {/* Top Deck for high-profile Actions (Hidden when severely scrolled for neat readability) */}
-  <div className={`hidden lg:block border-b border-slate-100 bg-slate-50 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${scrolled ? 'h-0 overflow-hidden opacity-0' : 'py-2 opacity-100'}`}>
-    <div className="max-w-7xl mx-auto flex justify-between items-center text-xs text-slate-500">
+  {/* <div className={`hidden lg:block border-b border-slate-100 bg-slate-50 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${scrolled ? 'h-0 overflow-hidden opacity-0' : 'py-2 opacity-100'}`}> */}
+    {/* <div className="max-w-7xl mx-auto flex justify-between items-center text-xs text-slate-500">
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-1.5"><MapPin size={12} className="text-accent" /> Delhi & Noida NCR</span>
         <span className="h-3 w-px bg-slate-200" />
         <span className="flex items-center gap-1.5"><Mail size={12} className="text-secondary" /> info@ambedkarbegumpura.org</span>
       </div>
       
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3"> */}
         {/* Top High-profile Action buttons matching exact design screen */}
-        <button 
+        {/* <button 
           onClick={handleScrollToApply} 
           className="bg-[#1e3a8a] text-white font-bold px-4 py-1.5 rounded text-[11px] uppercase tracking-wider hover:bg-blue-900 transition-colors flex items-center gap-1.5"
-        >
-          <GraduationCap size={13} />
+        > */}
+          {/* <GraduationCap size={13} />
           Apply for Scholarship
         </button>
         
@@ -317,14 +317,14 @@ export default function App() {
         </button>
       </div>
     </div>
-  </div>
+  </div> */}
 
   {/* Brand Identity & Primary Menu bar */}
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="flex justify-between lg:items-end items-center py-3 lg:py-4">
       
       {/* Logo and Brand block */}
-      <div 
+      {/* <div 
         className="flex items-center gap-2 sm:gap-3 cursor-pointer relative shrink-0" 
         onClick={() => {
           navigate("/");
@@ -351,10 +351,65 @@ export default function App() {
             Education • Equality • Empowerment
           </span>
         </div>
-      </div>
+      </div> */}
+      <div
+  className="flex items-center gap-4 cursor-pointer shrink-0"
+  onClick={() => {
+    navigate("/");
+    setActiveAnchor("#home");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }}
+>
+  <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden shrink-0">
+    <img
+      src="https://vrfacwizigigcpowkrye.supabase.co/storage/v1/object/public/General/ngo-logo.png"
+      alt="ABET Logo"
+      className="w-full h-full object-contain"
+      referrerPolicy="no-referrer"
+    />
+  </div>
+
+  <div className="flex flex-col justify-center">
+    {/* Single Row Title */}
+    <span className="font-bold text-[12px] sm:text-[16px] md:text-[20px] lg:text-[24px] xl:text-[30px] leading-none uppercase tracking-tight text-[#1e3a8a] whitespace-nowrap">
+      Ambedkar Begumpura Education Trust
+    </span>
+
+    {/* Tagline */}
+    <span className="text-[7px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-[13px] font-bold tracking-[0.25em] text-slate-500 mt-2">
+      Education • Equality • Empowerment
+    </span>
+  </div>
+</div>
+<div className="hidden lg:flex flex-col items-end flex-1">
+  <nav className="flex items-center gap-4 xl:gap-5 mt-4 whitespace-nowrap">
+    {[
+      { label: "Home", anchor: "#home" },
+      { label: "About Us", anchor: "#about" },
+      { label: "Programmes", anchor: "#programmes" },
+      { label: "Scholarships", anchor: "#scholarships" },
+      { label: "Apply", anchor: "#apply" },
+      { label: "Gallery", anchor: "#gallery" },
+      { label: "Contact", anchor: "#contact" }
+    ].map((item) => (
+      <Link
+        key={item.anchor}
+        to={item.anchor === "#apply" ? "/apply" : `/${item.anchor}`}
+        onClick={handleScrollToSection(item.anchor)}
+        className={`text-[13px] font-bold uppercase py-2 whitespace-nowrap transition-all border-b-2 hover:border-accent hover:text-accent ${
+          activeAnchor === item.anchor
+            ? "border-accent text-accent"
+            : "border-transparent text-slate-700"
+        }`}
+      >
+        {item.label}
+      </Link>
+    ))}
+  </nav>
+</div>
 
       {/* Main Nav Items */}
-      <nav className="hidden lg:flex items-center gap-6 lg:gap-8">
+      {/* <nav className="hidden lg:flex items-center gap-6 lg:gap-8">
         {[
           { label: "Home", anchor: "#home" },
           { label: "About Us", anchor: "#about" },
@@ -372,10 +427,12 @@ export default function App() {
           >
             {item.label}
           </Link>
-        ))}
+        ))} */}
+        {/* neha */}
+        
         
         {/* Condensed scrolling CTA button for donate */}
-        {scrolled && (
+        {/* {scrolled && (
           <button 
             onClick={() => setShowDonateModal(true)} 
             className="bg-accent text-white font-bold px-4 py-1.5 rounded text-xs uppercase tracking-wider hover:bg-amber-700 transition-all shadow active:scale-95 ease-in text-center flex items-center gap-1.5"
@@ -383,9 +440,9 @@ export default function App() {
             <Heart size={12} className="fill-white" />
             Donate
           </button>
-        )}
-      </nav>
-
+        )} */}
+      {/* </nav> */}
+      
       {/* Mobile burger toggle */}
       <div className="lg:hidden">
         <button 
@@ -427,7 +484,7 @@ export default function App() {
           </Link>
         ))}
 
-        <div className="grid grid-cols-2 gap-4 mt-4">
+        {/* <div className="grid grid-cols-2 gap-4 mt-4">
           <button 
             onClick={handleScrollToApply} 
             className="bg-[#1e3a8a] text-white py-3 rounded text-xs font-bold uppercase tracking-wider text-center"
@@ -440,7 +497,7 @@ export default function App() {
           >
             Donate Now
           </button>
-        </div>
+        </div> */}
       </motion.div>
     )}
   </AnimatePresence>
@@ -795,10 +852,11 @@ The Trust is committed to creating inclusive educational opportunities that enab
         {/* SECTION 3: DOUBLE CALL TO ACTION CARDS (BLUE & PEACH SPLIT) */}
         <section className="py-12 bg-white border-b border-slate-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-8">
+            {/* <div className="grid md:grid-cols-2 gap-8"> */}
+              <div className="grid">
               
               {/* Sky Blue Assistance Card */}
-              <div className="bg-[#f0f7ff] rounded-2xl p-6 sm:p-8 border border-blue-100 shadow-sm hover:shadow transition-shadow flex flex-col sm:flex-row gap-5 items-start text-left">
+              {/* <div className="bg-[#f0f7ff] rounded-2xl p-6 sm:p-8 border border-blue-100 shadow-sm hover:shadow transition-shadow flex flex-col sm:flex-row gap-5 items-start text-left">
                 <div className="w-12 h-12 bg-blue-100 text-[#1e3a8a] rounded-full flex items-center justify-center shrink-0 shadow-inner">
                   <FileText size={22} />
                 </div>
@@ -818,7 +876,7 @@ The Trust is committed to creating inclusive educational opportunities that enab
                     <ChevronRight size={14} />
                   </Link>
                 </div>
-              </div>
+              </div> */}
 
               {/* Saffron Peach Donation Card */}
               <div className="bg-[#fff7ed] rounded-2xl p-6 sm:p-8 border border-amber-100 shadow-sm hover:shadow transition-shadow flex flex-col sm:flex-row gap-5 items-start text-left">
@@ -1397,7 +1455,7 @@ const Hero = () => {
   }, [slides.length]);
 
   return (
-    <section id="home" className="relative w-full min-h-[100vh] lg:min-h-screen  lg:h-[480px] flex items-center bg-[#101630] overflow-hidden font-sans select-none">
+    <section id="home" className="relative w-full min-h-[600px] lg:min-h-[500px] lg:h-[500px] flex items-center bg-[#101630] overflow-hidden font-sans select-none">
       
       {/* LAYER 1: Full-width Background Image Slider */}
       <div className="absolute inset-0 z-0">
@@ -1438,7 +1496,7 @@ const Hero = () => {
       />
 
       {/* LAYER 4: Foreground Content Layer */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 relative z-30 w-full header-content-wrapper">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-30 w-full header-content-wrapper">
         <div className="max-w-xl lg:max-w-2xl text-left">
           
           {/* Main Typography Header */}
@@ -1446,14 +1504,14 @@ const Hero = () => {
               Education for <br/><span className="text-accent italic font-serif">Dignity and Equality</span> 
             </h1>
             
-            <p className="text-base sm:text-lg lg:text-xl text-slate-200 mb-8 lg:mb-10 leading-relaxed max-w-xl border-l-4 border-accent pl-4 lg:pl-6">
+            <p className="text-base sm:text-lg lg:text-xl text-slate-200 mb-6 lg:mb-8 leading-relaxed max-w-xl border-l-4 border-accent pl-4 lg:pl-6">
              Supporting students from economically and socially marginalised communities through scholarships, educational resources, and academic guidance.
             </p>
           
           {/* Styled CTA Button matching the image design */}
            <div className="flex flex-col sm:flex-row gap-4 lg:gap-5 w-full sm:w-auto">
               <Link to="/apply" className="btn-accent px-8 lg:px-10 py-4 lg:py-5 text-center text-base lg:text-lg flex items-center justify-center gap-3 shadow-2xl">
-                Apply for Scholarship <ChevronRight size={20} />
+                Apply for Assitance <ChevronRight size={20} />
               </Link>
               <a href="#about" className="bg-transparent hover:bg-white/20 text-transparent  px-8 lg:px-10 py-4 lg:py-5 text-center text-base lg:text-lg font-bold rounded-lg  transition-all active:scale-95">
                 Our Mission
@@ -1466,3 +1524,5 @@ const Hero = () => {
     </section>
   );
 };
+
+
