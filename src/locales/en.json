@@ -1,0 +1,100 @@
+{
+
+  "registration": "NITI AAYOG Registration No: 41864165190100",
+  "trust_name": "Ambedkar Begumpura Education Trust",
+  "tagline": "Education • Equality • Empowerment",
+  
+  "home": "Home",
+  "about": "About Us",
+  "programmes": "Programmes",
+  "scholarships": "Scholarships",
+  "apply": "Apply",
+  "gallery": "Gallery",
+  "contact": "Contact",
+  "obj":"Objectives",
+
+  "hero_title_1": "Education for",
+  "hero_title_2": "Dignity and Equality",
+
+  "hero_desc": "Supporting students from economically and socially marginalised communities through scholarships, educational resources, and academic guidance.",
+
+  "apply_btn": "Apply for Assistance",
+
+  "mission_btn": "Our Mission",
+
+  "mission_label": "Mission Statement",
+
+  "mission_title": "Ambedkar Begumpura Education Trust",
+
+  "mission_description": "To empower economically and socially marginalised communities through quality education, scholarships, academic support, and skill development, inspired by Dr. B. R. Ambedkar’s vision of equality, dignity, and social justice.",
+
+  "mission_description_2": "The Trust is committed to creating inclusive educational opportunities that enable every student to learn, grow, and achieve a life of self-respect and independence.",
+
+  "read_more": "Read More About Us",
+  
+  "trustees": {
+    "label": "Governing Board",
+    "title": "Distinguished Trustees",
+    "description": "Our trust is guided by veteran administrative professionals committed to social justice and educational excellence.",
+
+    "hemant": {
+      "name": "Mr. Hemant Rao",
+      "role": "President & Settlor",
+      "designation": "IAS (Retd)"
+    },
+
+    "dhiraj": {
+      "name": "Mr. Dhiraj Kumar",
+      "role": "Trustee Treasurer",
+      "designation": "Suptd. Engg (Retd)"
+    },
+
+    "mahender": {
+      "name": "Mr. Mahender Prakash",
+      "role": "Trust Trustee",
+      "designation": "Director of Horticulture (Retd)"
+    }
+  },
+  "objectives": {
+    "label": "What We Do",
+    "title": "Our Key Focus Areas",
+
+    "scholarships": {
+      "title": "Scholarships",
+      "description": "Providing financial assistance to deserving students to pursue their education without barriers.",
+      "action": "Apply Scholarship"
+    },
+
+    "digital_learning": {
+      "title": "Digital Learning Support",
+      "description": "Promoting access to digital education and technology for a better learning experience.",
+      "action": "Digital Hubs"
+    },
+
+    "books": {
+      "title": "Books & Study Material",
+      "description": "Distributing books and study materials to support academic excellence and growth.",
+      "action": "Library Centers"
+    },
+
+    "guidance": {
+      "title": "Career & Academic Guidance",
+      "description": "Offering mentoring and guidance to help students achieve their academic and career goals.",
+      "action": "Mentorship Programs"
+    }
+  },
+ 
+    "title": "Make a Difference",
+    "description": "Your contribution can help a student continue education with dignity and build a better future.",
+    "button": "Donate Now",
+    "footer_title": "Ambedkar Begumpura",
+    "footer_title_2": "Education Trust",
+    "footer_desc": "Empowering the youth through education and constitutional values. Registered Trust No: 100/2026.",
+    "footer_col": "Quick Links",
+    "footer_col_2": "Our Programs",
+    "link_1": "Digital Learning Support",
+    "link_2": "Books & Study Material",
+    "link_3": "Career Guidance",
+    "link_4": "Mentorship"
+
+}
