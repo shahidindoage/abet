@@ -659,14 +659,14 @@ export default function App() {
 
                         {/* Major heading */}
                         <h2 className="text-3xl md:text-4xl font-extrabold text-[#1e3a8a] leading-tight mb-6">
-                          {t("mission_title")}
+                          {/* {t("mission_title")} */}
                         </h2>
 
-                        <p className="text-slate-600 text-base leading-relaxed mb-4 font-medium">
+                        <p className="text-slate-600 text-xl leading-relaxed mb-4 font-medium">
                           {t("mission_description")}
                         </p>
 
-                        <p className="text-slate-500 text-sm leading-relaxed mb-8">
+                        <p className="text-slate-500 text-base leading-relaxed mb-8">
                           {t("mission_description_2")}
                         </p>
                         {/* Reading button opening a rich contextual popup modal */}
@@ -708,7 +708,7 @@ export default function App() {
                             <img
                               src="https://vrfacwizigigcpowkrye.supabase.co/storage/v1/object/public/General/ngo-team-1.png"
                               alt="Hemant Rao"
-                              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                              className="w-full h-full object-cover"
                             />
                           </div>
                           <div className="absolute bottom-1 right-1 bg-[#1e3a8a] text-white p-1.5 rounded-full shadow">
@@ -737,7 +737,7 @@ export default function App() {
                             <img
                               src="https://res.cloudinary.com/dx6zonqrt/image/upload/v1780566686/WhatsApp_Image_2026-06-04_at_2.34.43_PM_nx8hnz.jpg"
                               alt="Dhiraj Kumar"
-                              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                              className="w-full h-full object-cover "
                             />
                           </div>
                           <div className="absolute bottom-1 right-1 bg-[#1e3a8a] text-white p-1.5 rounded-full shadow">
@@ -766,7 +766,7 @@ export default function App() {
                             <img
                               src="https://res.cloudinary.com/dx6zonqrt/image/upload/v1780644232/WhatsApp_Image_2026-06-05_at_8.47.11_AM_xgmygx.jpg"
                               alt="Mahender Prakash"
-                              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                              className="w-full h-full object-cover"
                             />
                           </div>
                           <div className="absolute bottom-1 right-1 bg-[#1e3a8a] text-white p-1.5 rounded-full shadow">
